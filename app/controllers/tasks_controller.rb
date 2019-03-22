@@ -13,6 +13,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    render :new
   end
 
    def create
@@ -21,10 +22,9 @@ class TasksController < ApplicationController
     @micropost = current_user.tasks.build(task_params)
 
     if @task.save
-      flash[:success] = :'Task が正常に投稿されました'
+      flash[:success] = 'Task が正常に投稿されました'
       redirect_to @task
     else
-    @microposts = current_user.tasks.order('created_at DESC').page(params[:page])
       flash.now[:danger] = 'Task が投稿されませんでした'
       render :new
     end
